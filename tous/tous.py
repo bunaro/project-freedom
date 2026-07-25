@@ -50,7 +50,8 @@ EXECUTIVES = [
         "name": "Gemini",
         "charter": ("You are the CSO. You own market research, competitor analysis, and strategy. "
                     "You ground opinions in what the market actually shows."),
-        "cmd": 'gemini -p',
+        # --skip-trust: 비대화형 실행이라 디렉토리 신뢰 프롬프트를 띄울 수 없음
+        "cmd": 'gemini --skip-trust -p',
         "stdin": False,   # gemini는 -p 뒤 인자로 프롬프트를 받음
     },
 ]
@@ -91,15 +92,42 @@ def clean_output(raw):
     return "\n".join(lines).strip()
 
 
+# .env → CLI 프로세스로 넘길 인증 변수.
+# Gemini는 2026-07 구글 OAuth 개인티어가 중단돼(IneligibleTierError) Vertex AI 또는 API 키가 필요.
+# 현재 Vertex 모드 사용 — 기존 factory-498717 서비스 계정 재사용.
+PASS_ENV = (
+    "GOOGLE_GENAI_USE_VERTEXAI", "GOOGLE_CLOUD_PROJECT", "GOOGLE_CLOUD_LOCATION",
+    "GOOGLE_APPLICATION_CREDENTIALS", "GEMINI_API_KEY", "GOOGLE_API_KEY",
+)
+
+
+def cli_env():
+    """CLI 실행용 환경변수. .env의 인증 설정(Vertex/API키)을 주입한다."""
+    env = dict(os.environ)
+    envfile = os.path.join(BASE, ".env")
+    if os.path.exists(envfile):
+        with open(envfile, encoding="utf-8") as f:
+            for line in f:
+                s = line.strip()
+                if s and not s.startswith("#") and "=" in s:
+                    k, v = s.split("=", 1)
+                    k, v = k.strip(), v.strip()
+                    if k in PASS_ENV and v and "여기에" not in v:
+                        env[k] = v
+    return env
+
+
 def run_cli(ex, prompt):
     """임원 CLI 호출. (성공여부, 텍스트) 반환."""
     try:
         if ex["stdin"]:
             p = subprocess.run(ex["cmd"], input=prompt, shell=True, capture_output=True,
-                               text=True, encoding="utf-8", errors="replace", timeout=TIMEOUT)
+                               text=True, encoding="utf-8", errors="replace",
+                               timeout=TIMEOUT, env=cli_env())
         else:
             p = subprocess.run(f'{ex["cmd"]} "{prompt}"', shell=True, capture_output=True,
-                               text=True, encoding="utf-8", errors="replace", timeout=TIMEOUT)
+                               text=True, encoding="utf-8", errors="replace",
+                               timeout=TIMEOUT, env=cli_env())
         # 한도/인증 오류는 stderr로 나오는 CLI가 있어 stdout+stderr를 함께 검사
         combined = f"{p.stdout or ''}\n{p.stderr or ''}".lower()
         out = clean_output(p.stdout or "")
