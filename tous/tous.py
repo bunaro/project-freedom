@@ -120,6 +120,55 @@ def cli_env():
     return env
 
 
+GENESIS  = os.path.join(ROOT, "docs", "constitution", "genesis.md")
+MEMORY   = os.path.join(BASE, "memory")   # 임원별 기억 파일
+
+
+def memory_path(role):
+    return os.path.join(MEMORY, f"{role.lower()}.md")
+
+
+def load_genesis():
+    """창립 문서 — 모든 임원이 매 회의 전에 읽는다.
+    (CLI는 매번 새 프로세스라 기억이 없다 → 정체성을 주입하지 않으면 매번 남남이 됨)"""
+    if os.path.exists(GENESIS):
+        with open(GENESIS, encoding="utf-8") as f:
+            return f.read()
+    return ""
+
+
+def load_memory(role):
+    """임원 개인 기억 — 과거 자기 발언·결정·교훈."""
+    p = memory_path(role)
+    if os.path.exists(p):
+        with open(p, encoding="utf-8") as f:
+            return f.read()
+    return ""
+
+
+def append_memory(role, entry):
+    """회의 후 자기 발언 요지를 기억에 남긴다."""
+    os.makedirs(MEMORY, exist_ok=True)
+    p = memory_path(role)
+    head = "" if os.path.exists(p) else f"# {role} 기억\n\n_회의 때마다 자동 누적. 다음 회의에서 이 파일을 읽고 들어온다._\n"
+    with open(p, "a", encoding="utf-8") as f:
+        if head:
+            f.write(head)
+        f.write(entry)
+
+
+def build_context(ex):
+    """임원에게 주입할 정체성 컨텍스트(창립문서 + 개인기억)."""
+    parts = [ex["charter"]]
+    g = load_genesis()
+    if g:
+        parts.append("--- 창립 문서 (Project Freedom 창세기) ---\n" + g)
+    m = load_memory(ex["role"])
+    if m:
+        parts.append("--- 당신의 과거 기억 (이전 회의에서 당신이 한 말) ---\n" + m)
+    return "\n\n".join(parts)
+
+
 def boardroom_dir():
     """회의 전용 빈 작업 디렉토리.
     CLI(특히 gemini)가 작업 폴더 파일을 컨텍스트로 자동 로딩해 안건 대신 코드 분석을
@@ -198,13 +247,16 @@ def cmd_meeting(agenda):
     minutes, present = [], []
     for ex in EXECUTIVES:
         print(f"[{ex['role']}] 발언 요청 중...")
-        prompt = (f"{ex['charter']}\n\n{RULES}\n\n"
-                  f"--- AGENDA ---\n{agenda}\n\n"
+        prompt = (f"{build_context(ex)}\n\n{RULES}\n\n"
+                  f"--- 안건 ---\n{agenda}\n\n"
                   f"{ex['role']}로서 당신의 입장을 말하라. 반드시 한국어로.")
         ok, out = run_cli(ex, prompt)
         if ok:
             present.append(ex["role"])
             minutes.append((ex["role"], ex["name"], out))
+            # 자기 발언을 기억에 누적 — 다음 회의에서 이걸 읽고 들어온다
+            append_memory(ex["role"],
+                          f"\n## 회의 #{no:03d} ({today})\n**안건**: {agenda[:120]}\n\n{out}\n")
             print(f"  → 발언 확보 ({len(out)}자)\n")
         else:
             minutes.append((ex["role"], ex["name"], f"_(불참: {out})_"))
