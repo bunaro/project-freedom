@@ -5,3 +5,4 @@ __pycache__/
 tous/.env
 tous/vertex_key.json
 tous/remote.log
+tous/.boardroom/

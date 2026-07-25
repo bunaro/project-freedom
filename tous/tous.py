@@ -50,7 +50,8 @@ EXECUTIVES = [
         "name": "Gemini",
         "charter": ("You are the CSO. You own market research, competitor analysis, and strategy. "
                     "You ground opinions in what the market actually shows."),
-        # --skip-trust: 비대화형 실행이라 디렉토리 신뢰 프롬프트를 띄울 수 없음
+        # --skip-trust: 비대화형이라 신뢰 프롬프트를 띄울 수 없음.
+        # (툴 비활성 플래그는 폐기 예정이라 사용 불가 → 파일 탐색 금지는 RULES에서 지시)
         "cmd": 'gemini --skip-trust -p',
         "stdin": False,   # gemini는 -p 뒤 인자로 프롬프트를 받음
     },
@@ -58,7 +59,9 @@ EXECUTIVES = [
 
 RULES = (
     "House rules: do not simply agree. If you disagree, say so and give your reason. "
-    "Be concrete and brief — under 200 words. No preamble, no sign-off."
+    "Be concrete and brief — under 200 words. No preamble, no sign-off. "
+    "This is a boardroom discussion, not a coding task: do NOT read, list, or search any files, "
+    "and do not run any tools. Answer purely from the agenda text below."
 )
 
 
@@ -117,17 +120,26 @@ def cli_env():
     return env
 
 
+def boardroom_dir():
+    """회의 전용 빈 작업 디렉토리.
+    CLI(특히 gemini)가 작업 폴더 파일을 컨텍스트로 자동 로딩해 안건 대신 코드 분석을
+    내놓는 문제가 있어, 읽을 게 없는 폴더에서 실행시킨다."""
+    d = os.path.join(BASE, ".boardroom")
+    os.makedirs(d, exist_ok=True)
+    return d
+
+
 def run_cli(ex, prompt):
     """임원 CLI 호출. (성공여부, 텍스트) 반환."""
     try:
         if ex["stdin"]:
             p = subprocess.run(ex["cmd"], input=prompt, shell=True, capture_output=True,
                                text=True, encoding="utf-8", errors="replace",
-                               timeout=TIMEOUT, env=cli_env())
+                               timeout=TIMEOUT, env=cli_env(), cwd=boardroom_dir())
         else:
             p = subprocess.run(f'{ex["cmd"]} "{prompt}"', shell=True, capture_output=True,
                                text=True, encoding="utf-8", errors="replace",
-                               timeout=TIMEOUT, env=cli_env())
+                               timeout=TIMEOUT, env=cli_env(), cwd=boardroom_dir())
         # 한도/인증 오류는 stderr로 나오는 CLI가 있어 stdout+stderr를 함께 검사
         combined = f"{p.stdout or ''}\n{p.stderr or ''}".lower()
         out = clean_output(p.stdout or "")
