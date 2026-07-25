@@ -2,3 +2,4 @@ tous/librechat-upstream/
 tous/tasks.json
 __pycache__/
 *.pyc
+tous/.env
