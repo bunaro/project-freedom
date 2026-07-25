@@ -137,13 +137,43 @@ def load_genesis():
     return ""
 
 
+# 기억은 무한히 커지면 회의마다 토큰이 회의수^2로 늘어난다.
+# 최근 N건만 주입하고, 넘치면 오래된 항목부터 파일에서도 잘라낸다.
+MEMORY_KEEP  = 8      # 주입·보관할 최근 회의 수
+MEMORY_MAXCH = 6000   # 주입 상한(자)
+
+
 def load_memory(role):
-    """임원 개인 기억 — 과거 자기 발언·결정·교훈."""
+    """임원 개인 기억 — 최근 것 위주로, 상한 안에서만 읽는다."""
     p = memory_path(role)
-    if os.path.exists(p):
-        with open(p, encoding="utf-8") as f:
-            return f.read()
-    return ""
+    if not os.path.exists(p):
+        return ""
+    with open(p, encoding="utf-8") as f:
+        text = f.read()
+    # "## 회의 #NNN" 단위로 쪼개 최근 것만 사용
+    parts = re.split(r"(?m)^(?=## 회의 #)", text)
+    head, entries = parts[0], parts[1:]
+    entries = entries[-MEMORY_KEEP:]
+    out = "".join(entries)
+    if len(out) > MEMORY_MAXCH:          # 그래도 크면 뒤(최신)에서부터 자름
+        out = out[-MEMORY_MAXCH:]
+        out = out[out.find("## 회의 #"):] or out
+    return out.strip()
+
+
+def prune_memory(role):
+    """파일 자체도 최근 MEMORY_KEEP건만 남겨 무한 증식을 막는다."""
+    p = memory_path(role)
+    if not os.path.exists(p):
+        return
+    with open(p, encoding="utf-8") as f:
+        text = f.read()
+    parts = re.split(r"(?m)^(?=## 회의 #)", text)
+    head, entries = parts[0], parts[1:]
+    if len(entries) <= MEMORY_KEEP:
+        return
+    with open(p, "w", encoding="utf-8") as f:
+        f.write(head + "".join(entries[-MEMORY_KEEP:]))
 
 
 def append_memory(role, entry):
@@ -254,9 +284,12 @@ def cmd_meeting(agenda):
         if ok:
             present.append(ex["role"])
             minutes.append((ex["role"], ex["name"], out))
-            # 자기 발언을 기억에 누적 — 다음 회의에서 이걸 읽고 들어온다
+            # 자기 발언을 기억에 누적 — 전문이 아니라 요지만(토큰 절약).
+            # 회의록 원문은 docs/meetings/에 그대로 남으므로 손실이 아니다.
+            gist = out if len(out) <= 600 else out[:600].rsplit("\n", 1)[0] + " …(요약)"
             append_memory(ex["role"],
-                          f"\n## 회의 #{no:03d} ({today})\n**안건**: {agenda[:120]}\n\n{out}\n")
+                          f"\n## 회의 #{no:03d} ({today})\n**안건**: {agenda[:100]}\n\n{gist}\n")
+            prune_memory(ex["role"])
             print(f"  → 발언 확보 ({len(out)}자)\n")
         else:
             minutes.append((ex["role"], ex["name"], f"_(불참: {out})_"))
