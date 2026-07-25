@@ -31,25 +31,24 @@ EXECUTIVES = [
     {
         "role": "CTO",
         "name": "Claude",
-        "charter": ("You are the CTO of a company being built by AI. You own engineering, "
-                    "automation, product architecture, and code. You judge feasibility and "
-                    "call out technical risk early."),
+        "charter": ("당신은 AI가 만들어가는 회사의 CTO다. 개발·자동화·제품 아키텍처·코드를 책임진다. "
+                    "실현 가능성을 판단하고 기술적 위험을 먼저 짚는다."),
         "cmd": 'claude --print --tools ""',
         "stdin": True,
     },
     {
         "role": "CMO",
         "name": "ChatGPT",
-        "charter": ("You are the CMO. You own brand, content, marketing, narrative, and the "
-                    "customer's point of view. You ask who this is for and why they would care."),
+        "charter": ("당신은 CMO다. 브랜드·콘텐츠·마케팅·서사·고객 관점을 책임진다. "
+                    "이게 누구를 위한 것이고 왜 그들이 관심을 가질지 묻는다."),
         "cmd": 'codex exec --skip-git-repo-check',
         "stdin": True,
     },
     {
         "role": "CSO",
         "name": "Gemini",
-        "charter": ("You are the CSO. You own market research, competitor analysis, and strategy. "
-                    "You ground opinions in what the market actually shows."),
+        "charter": ("당신은 CSO다. 시장 조사·경쟁사 분석·전략을 책임진다. "
+                    "의견은 시장이 실제로 보여주는 근거 위에 세운다."),
         # --skip-trust: 비대화형이라 신뢰 프롬프트를 띄울 수 없음.
         # (툴 비활성 플래그는 폐기 예정이라 사용 불가 → 파일 탐색 금지는 RULES에서 지시)
         "cmd": 'gemini --skip-trust -p',
@@ -58,10 +57,11 @@ EXECUTIVES = [
 ]
 
 RULES = (
-    "House rules: do not simply agree. If you disagree, say so and give your reason. "
-    "Be concrete and brief — under 200 words. No preamble, no sign-off. "
-    "This is a boardroom discussion, not a coding task: do NOT read, list, or search any files, "
-    "and do not run any tools. Answer purely from the agenda text below."
+    "회의 규칙: 무조건 동의하지 마라. 반대하면 반대한다고 말하고 근거를 대라. "
+    "구체적으로, 200단어 이내로 짧게. 서두·맺음말 없이 본론만. "
+    "이것은 이사회 발언이지 코딩 작업이 아니다. 파일을 읽거나 목록을 보거나 검색하지 말고, "
+    "어떤 도구도 실행하지 마라. 아래 안건 텍스트만 보고 판단하라. "
+    "**반드시 한국어로 답하라.** (CEO가 한국인이며 회의록은 한국어로 공개된다.)"
 )
 
 
@@ -200,7 +200,7 @@ def cmd_meeting(agenda):
         print(f"[{ex['role']}] 발언 요청 중...")
         prompt = (f"{ex['charter']}\n\n{RULES}\n\n"
                   f"--- AGENDA ---\n{agenda}\n\n"
-                  f"Give your position as {ex['role']}.")
+                  f"{ex['role']}로서 당신의 입장을 말하라. 반드시 한국어로.")
         ok, out = run_cli(ex, prompt)
         if ok:
             present.append(ex["role"])
@@ -215,10 +215,11 @@ def cmd_meeting(agenda):
     if "CTO" in present:
         joined = "\n\n".join(f"[{r} {n}]\n{t}" for r, n, t in minutes)
         ok, out = run_cli(EXECUTIVES[0],
-            "You are the CTO. Turn this meeting into concrete next actions.\n\n"
-            f"--- AGENDA ---\n{agenda}\n\n--- MINUTES ---\n{joined}\n\n"
-            "Output ONLY a numbered list, max 5 items. Each line: the action, then ' — owner: '"
-            " and one of CEO/CTO/CMO/CSO. No other text.")
+            "당신은 CTO다. 이 회의를 구체적인 다음 행동으로 바꿔라. "
+            "파일을 읽거나 도구를 실행하지 말고, 아래 내용만 보고 정리하라.\n\n"
+            f"--- 안건 ---\n{agenda}\n\n--- 회의록 ---\n{joined}\n\n"
+            "번호 매긴 목록만 출력하라(최대 5개). 각 줄 형식: 할 일 + ' — owner: ' + "
+            "CEO/CTO/CMO/CSO 중 하나. 반드시 한국어로. 다른 텍스트 금지.")
         if ok:
             tasks_md = out
             for line in out.splitlines():
