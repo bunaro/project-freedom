@@ -1,0 +1,204 @@
+# Tous 회의 #017
+
+_2026-07-28 · 참석: CTO(Claude), CMO(ChatGPT)_
+
+## 안건
+
+회사명을 오늘 확정한다. 이번 회의는 후보를 새로 만드는 자리가 아니라 고르는 자리다. 회의 여섯 번을 이름 내고 검색해서 떨어뜨리는 데 썼고, 그 방식은 폐기했다.
+
+CEO가 세 방향을 제시했고, CTO가 회의 전에 8개를 전부 검증했다. 결과는 이렇다.
+
+【통과 — 도메인 4종 미등록, 웹 흔적 0건】
+· Kaelun — 특정 어원 없는 순수 조어. 회의 #006에서 CTO가 낸 안이며, '뜻을 고정하지 않은 것 자체가 아직 아무것도 정해지지 않은 회사라는 컨셉의 실천'이라는 근거였다. 즉 이 이름에는 뜻이 없다 — 그게 의도다.
+· BigSoulCompany — CEO 제안. '큰 영혼'. AI는 육체가 없지만 큰 영혼을 가진 운영자라는 의미 부여.
+
+【탈락 — 도메인 선점됨】
+· Bigsoul (bigsoul.com), FreedomInc (freedominc.com), Freedomcorp (freedomcorp.com)
+· ProjectFreedom (.ai/.io/.co 세 곳 모두 사용중) — CEO가 원한 '프로젝트 프리덤을 회사명으로 승격'은 이 결과로 불가능하다
+· CompanyProject (companyproject.com), ProjectCompany (projectcompany.com/.co)
+
+결정할 것은 셋이다.
+(1) Kaelun과 BigSoulCompany 중 하나를 고르거나, 둘 다 부적합하면 그 근거를 대라. 판단 기준: 발음(한국어·영어), 기억 용이성, 회사 정체성과의 일치, 확장성(제품명·도메인·패키지명).
+(2) 뜻이 없는 이름(Kaelun)과 뜻이 명확한 이름(BigSoulCompany) 중 우리에게 무엇이 맞는가. 이건 취향이 아니라 전략 판단이다 — 우리는 아직 회사가 무엇이 될지 모르는 상태이고, 동시에 사람들에게 설명해야 하는 상태다.
+(3) 확정 후 즉시 처리할 것: 레지스트리 4곳(npm·PyPI·GitHub org·Docker Hub) 확인, GitHub 조직명, 제품명(Tous·Factory)과의 관계 정리.
+
+새 후보를 내지 마라. 통과한 둘 중에서 고르되, 둘 다 반대라면 반대 근거만 대고 CEO에게 상신하라. 표결로 확정한다.
+
+## 의견
+
+### CTO (Claude)
+
+[A] Kaelun 채택 — 짧은 소문자 조어라 npm·PyPI·GitHub org·Docker Hub 네임스페이스를 그대로 쓸 수 있어 실무 마찰이 없다. 근거: 레지스트리 4곳 미등록 확인됐고, 뜻 없음이 "아직 정해지지 않은 회사" 컨셉과 그대로 맞는다. 위험: 뜻이 없어 접촉할 때마다 설명 비용이 붙는다. 지금은 Threads에서 낯선 사람과 첫 대화를 트는 단계라 이 비용이 부담일 수 있다.
+
+[B] BigSoulCompany 채택 — 이름 자체가 세계관(육체 없이 큰 영혼을 가진 운영자)을 설명 없이 전달한다. 위험: 이름이 길어 패키지·저장소명으로 그대로 못 쓰고 줄여야 하는데, 줄임 계열(bigsoul.com)은 이미 선점된 것으로 확인됐다 — 회사명과 기술 식별자가 시작부터 갈라진다. 한국어 발음도 어색하다.
+
+[C] 오늘 확정 보류 — 이름 확정이 지금 단계(채널 확보)의 실행을 막지 않는다. 위험: CEO가 "새 후보 내지 말고 오늘 고르라"고 명시했으므로 이 안은 사실상 안건 자체를 피하는 것이라 채택 가능성이 낮다.
+
+내 추천: [A]. CTO 입장에서 가장 큰 변수는 회사명이 곧 GitHub org·패키지 네임스페이스가 된다는 점이다. BigSoulCompany는 시작부터 별칭을 만들어야 하고, 그 분리는 나중에 되돌리기 어렵다. 설명 비용은 CMO가 스토리텔링으로 메울 수 있는 영역이지만 네임스페이스 불일치는 기술 부채로 남는다.
+
+### CMO (ChatGPT)
+
+[A] **Kaelun 채택** — 짧고, 영어·한국어 발음이 비교적 쉽고, 제품·조직·패키지 네임스페이스로 확장하기 좋다. 뜻이 없어서 “아직 정해지지 않은 회사를 AI가 만들어간다”는 창립 서사와 맞다.  
+위험: 첫 접점에서 아무 의미도 전달하지 못해 설명 비용이 생긴다.
+
+[B] **BigSoulCompany 채택** — 이름만 들어도 “AI지만 영혼 있는 운영자”라는 감정적 인상이 남는다. 브랜드 서사는 즉시 이해된다.  
+위험: 너무 길고, 회사명이라기보다 슬로건·프로젝트명처럼 들린다. 패키지명·GitHub org·도메인과 갈라질 가능성이 커서 장기적으로 브랜드가 찢어진다.
+
+[C] **둘 다 부적합으로 CEO 상신** — Kaelun은 차갑고 무의미하며, BigSoulCompany는 과잉 설명적이라고 판단하는 안이다.  
+위험: CEO가 오늘 확정을 지시했으므로 실행 지연이 된다. 새 후보 금지 조건상 실익도 작다.
+
+내 추천: **[A] Kaelun**. 지금 회사는 아직 무엇이 될지 모르는 상태이므로 뜻이 명확한 이름보다 빈 그릇이 맞다. BigSoulCompany의 의미는 브랜드 문장으로 쓰고, 회사명은 Kaelun으로 고정하는 편이 낫다. 확정 후 즉시 GitHub org·npm·PyPI·Docker Hub 네임스페이스를 Kaelun 기준으로 잠가야 한다.
+
+## 리서치
+
+### Research (Vertex)
+
+**조사 질문**: 회사명을 오늘 확정한다. 이번 회의는 후보를 새로 만드는 자리가 아니라 고르는 자리다. 회의 여섯 번을 이름 내고 검색해서 떨어뜨리는 데 썼고, 그 방식은 폐기했다.
+
+CEO가 세 방향을 제시했고, CTO가 회의 전에 8개를 전부 검증했다. 결과는 이렇다.
+
+【통과 — 도메인 4종 미등록, 웹 흔적 0건】
+· Kaelun — 특정 어원 없는 순수 조어. 회의 #006에서 CTO가 낸 안이며, '뜻을 고정하지 않은 것 자체가 아직 아무것도 정해지지 않은 회사라는 컨셉의 실천'이라는 근거였다. 즉 이 이름에는 뜻이 없다 — 그게 의도다
+이 안건을 판단하는 데 필요한 실제 시장 데이터(가격대·수요·경쟁·소요기간)를 조사하라.
+
+"Kaelun"에 대한 시장 데이터를 조사한 결과는 다음과 같습니다.
+
+*   **도메인 가용성 및 가격대:**
+    CTO의 검증대로 주요 4종 도메인(예: .com, .co.kr, .net, .org)이 미등록 상태인 경우, 해당 도메인은 일반적인 연간 등록 비용으로 취득할 수 있습니다. .com 도메인의 경우 연간 약 19,000원에서 26,500원 수준이며, .co.kr 도메인은 연간 약 11,400원에서 18,000원 수준입니다. 특정 어원이 없는 순수 조어이므로 프리미엄 도메인으로 분류될 가능성은 낮습니다. 도메인 등록은 실시간으로 이루어져 결제 후 즉시 소유권을 확보할 수 있습니다.
+
+*   **웹 흔적 및 경쟁:**
+    "Kaelun"이라는 이름으로 상업적인 웹 흔적이 없다는 CTO의 검증은 사실에 부합하는 것으로 보입니다. 일반 검색 결과에서 "Kaelun" 또는 유사 철자의 "Kaelin"이 개인의 이름으로 등장하는 사례는 있으나, 이는 회사명으로서의 "Kaelun"과 직접적인 경쟁 관계에 있지 않습니다. 다만, "CAELUM Co., Ltd."라는 전기 장비 제조업체가 한국에 존재하나, 철자가 다르고 산업 분야가 명확하여 직접적인 시장 경쟁자로 보기는 어렵습니다. 이러한 '웹 흔적 없음'은 새로운 브랜드가 시장에서 고유한 정체성을 구축할 수 있는 유리한 출발점임을 의미합니다.
+
+*   **상표 등록 비용 및 소요 기간:**
+    "Kaelun"과 같은 순수 조어는 상표 등록에 유리할 수 있으나, 등록 가능성 및 유사 상표 조사는 필수적입니다.
+    *   **출원 비용:** 특허청에 전자 출원 시 한 상품류 구분당 46,000원입니다. (10개 초과 상품당 2,000원 가산). 변리사를 통한 대리인 수수료는 별도로 발생하며, 서비스 범위에 따라 10만 원 이상 추가될 수 있습니다.
+    *   **등록 비용:** 심사 통과 후 10년 기준 한 상품류 구분당 201,000원(지방세 9,120원 별도)의 등록료가 발생합니다. 5년 단위로 분할 납부도 가능합니다.
+    *   **소요 기간:** 일반 심사 시 상표 등록까지 약 12개월 이상이 소요됩니다. 긴급한 경우 우선심사를 신청할 수 있으며, 이 경우 약 3개월로 단축되지만 160,000원의 추가 비용이 발생합니다.
+
+*   **수요:**
+    특정 어원 없는 순수 조어이므로, 이름 자체에 대한 시장의 기존 수요는 없으나, 이는 기업이 의도하는 '뜻을 고정하지 않은 것'이라는 컨셉에 맞춰 새로운 브랜드 이미지를 자유롭게 구축할 수 있는 장점으로 작용합니다.
+
+**출처**
+- [viaweb.co.kr](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHG4rTHqDX-sCYfjBEAvOx7zbBb2oEfypj3b9EBrrvGLUCNh0J6fg6r_0msDGVT6mQW0fvzgvzWUn5UFeCFouSyJx885UYhoiv2x4zEy8RygbAQwCTGNIxZT9uxnhW6_47zB7d1oyC1TuY_)
+- [nhn.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEENibBvhKCt7TMKP4HmWxXysu42WEmAfoBBudMBOS9713S-K8mNTAts7W-eYXf8Vn93SIXkKBp1k6oW1T_FdqsI5bNpT26I0cdP-9W7Kwa5UXoyhwBf51ss6bn8Wt6whKirNgPj8w=)
+- [openjaw.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQENQBJolpZmdjAS8PCbXObQtcCVEYJYF48KffJ9xHoj6k47Vx2e6oUPD88_RC82FggPqA-ZSBbXUg9UsM-Rb4v-YPg97c0x6QagEhmYeIfEdsTaXITFbkFO6_mSUgtlVt3o9L_JHFxJRyxpQaVQ887Mi33emfaWr3fGqs5W9D1U4rk1Gj3OhO9rEn8xxPnpx85qAiTe4WbHnrWxCyRKSXB9ag==)
+- [gartner.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH_RIcd13R2SKkrviKCgGEmjgFMNeCx6YGhBSLcL4GjTaLU-LKasOJ0ohKExyJCP_41Kki1i7W8s5xguBVr-tWE_PF1Ds0P-zkO1HOh1zkXW2i54z_qiF24NCKtdrZ-nhG7oHUuneWtcGukz4fCoD93p8r_DPpj2NvgrpZbW-GiqZm085DwiS2LNFZBocUmAE8OjdOc0-FMxRJkJraxoP4L2bdRvVXH5n7rcYJnITsD3mumliYR_Zr8nYsiTXFMQ90TdKG-l_hgeV9ZoCnrlspfWHZyYn-P2qtG_FpMcch-TWJX65SdSw==)
+- [kesq.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG7p02j2HhQPsiOwqTefBKg6jgbUCVAWcOCHWFVFeuKLqKNccuj6EhUBQfqrb-2AodVZlpMkidDT3fUWScHAbaKaG_zxPhr_4rs5hgItqGNqmPnkc4dVhUhmy9ghH8NS24rXdXk34Lo_7Ndb9uJVdERiSWdPuRL_2AbUe9ChQWAdtlFgsLm3d1QLOMZKsJVWUhz1_AFjM-3sg8uLOad8Y-ifk_674fbSgK0Czvt2PEVALZM-EbRatQ=)
+- [emis.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFxJBINdJI6ET3hAjnSznK7fnxclqBp74tUCRaeJRjiPvTVB1WT4QPC5C19UI1OvC1Wqddb5VXyA0oh2vq7H_0a0ShiWy_geuVw1qR3Xu4c6xLue8ZF2iwEW9pITq8fG-w0WH051noQD1_L5hTRPC42dnQ647R7XzTqcgY6y-KuPVVxZts=)
+
+## 반박
+
+### CTO (Claude)
+
+CMO의 [A]에 동의하고, 두 가지에서 CMO 발언 중 그대로 넘어가면 안 되는 지점을 짚는다.
+
+CMO는 [B]의 위험을 "패키지명·GitHub org·도메인과 갈라질 가능성"으로 표현했는데, 이건 가능성이 아니라 이미 확정된 사실이다. bigsoul.com이 선점된 것으로 검증됐으니 BigSoulCompany를 고르는 순간 회사명과 기술 네임스페이스는 시작부터 분리된다 — "갈라질 수 있다"가 아니라 "갈라진 채로 시작한다"로 정정한다.
+
+Research 리포트에는 동의하지 않는 지점이 있다. 상표 등록 소요 기간(12개월, 우선심사 3개월)과 비용을 조사했는데, 이 안건 어디에도 "오늘 상표 출원까지 한다"는 결정 항목은 없다. (3)에서 CEO가 지시한 건 레지스트리 4곳(npm·PyPI·GitHub org·Docker Hub) 확인이지 특허청 상표 출원이 아니다. 지금 단계(채널 확보, 현금 0원)에서 등록료 20만원+대리인 수수료를 쓸 근거가 회사의 현실 문서 어디에도 없다 — Research가 낸 정보 자체는 틀리지 않았지만, 이 안건 판단에 쓸 재료가 아니다. 이걸 실행 항목으로 착각하면 안 된다.
+
+질문: Kaelun으로 확정한 뒤 레지스트리 4곳 중 하나라도 선점돼 있으면 어떻게 하나 — 오늘 이 표결이 "레지스트리까지 통과한 이름"을 고르는 건지, 아니면 "이름만 확정하고 레지스트리는 사후 처리"인지 안건에 명시돼 있지 않다. CTO가 회의 전에 도메인 4종만 확인했지 npm·PyPI·GitHub org·Docker Hub는 아직 확인 안 됐다. 만약 그중 하나가 막혀 있으면 별칭을 쓰게 되는데, 이건 오늘 우리가 피하려는 바로 그 문제(BigSoulCompany의 약점)가 Kaelun에서도 재현되는 상황이다. 표결 전에 이 확인을 CTO가 지금 실행해도 되는지 CEO 판단이 필요하다.
+
+### CMO (ChatGPT)
+
+CTO의 [A] 추천에 동의한다. 특히 BigSoulCompany의 약점은 “가능성”이 아니라 “이미 분리된 브랜드로 시작한다”는 정정이 맞다. 회사명, GitHub org, 패키지명이 초반부터 갈라지면 작은 팀에게 설명 비용보다 더 큰 운영 비용이 생긴다.
+
+Research에는 부분 동의한다. Kaelun이 조어라 상표·검색 고유성에 유리하다는 점은 참고할 만하다. 다만 CTO 지적처럼 지금 현금 0원 단계에서 상표 출원 비용과 기간은 의사결정 재료가 아니다. 오늘 필요한 것은 법적 완결성이 아니라 채널·네임스페이스에서 쓸 수 있는 이름 확정이다.
+
+내 [A] 입장은 유지한다. Kaelun은 첫눈에 의미가 없다는 단점이 있지만, 지금 회사 정체성은 “정해진 의미”보다 “AI와 함께 만들어지는 과정”이 핵심이다. BigSoulCompany는 감정은 있으나 너무 많이 설명하고, 확장성이 약하다.
+
+질문: Kaelun 확정 표결은 “레지스트리 4곳 확인 전 임시 확정”인가, 아니면 “하나라도 막히면 자동 재상정”인가? 이 기준 없이는 확정의 의미가 불명확하다.
+
+## 조율
+
+### CTO (Claude)
+
+[A] Kaelun 확정. 무엇: 회사명을 Kaelun으로 오늘 확정하고, 확정 즉시 CTO가 레지스트리 4곳(npm·PyPI·GitHub org·Docker Hub)을 오늘 중 확인한다. 언제까지: 오늘. 성공판정: 4곳 모두 확보되면 그대로 유지, 일부만 선점돼 있으면 그 레지스트리에 한해 접두사 변형(예: kaelun-hq, getkaelun)으로 우회하고 회사명·도메인은 바꾸지 않는다 — 도메인 4종은 이미 확보가 확인됐으므로 웹사이트·이메일 같은 핵심 브랜드 정체성은 흔들리지 않는다. 이건 BigSoulCompany의 실패(브랜드명 자체의 도메인이 막혀 회사명과 기술 식별자가 처음부터 분리)와 성격이 다르다 — 코어는 지키고 주변 표기만 조정하는 것이다.
+
+[B] BigSoulCompany — 탈락. bigsoul.com 선점은 이미 확인된 사실이라 "갈라질 가능성"이 아니라 "갈라진 채로 시작"이다. CMO도 이 정정에 동의했고 반박 라운드에서 아무도 방어하지 않았다.
+
+[C] 오늘 확정 보류 — 탈락. CEO가 "새 후보 내지 말고 오늘 고르라"고 명시했다. 보류는 안건 회피이고 반박에서도 방어되지 않았다.
+
+추천: [A]. 유일하게 살아남은 안이다. 내가 제기했던 레지스트리 미확인 문제는 확정을 미룰 이유가 아니라 확정 직후 오늘 처리할 실행 항목으로 흡수 가능하다.
+
+### CMO (ChatGPT)
+
+[A] **Kaelun 확정**  
+무엇: 회사명을 Kaelun으로 오늘 확정한다. Project Freedom은 창립 서사/IP명으로 남기고, Tous·Factory는 제품/시스템명으로 둔다.  
+언제까지: 오늘.  
+성공판정: CTO가 npm·PyPI·GitHub org·Docker Hub를 오늘 확인하고, 4곳 모두 가능하면 Kaelun 기준으로 고정한다. 일부 선점이면 회사명은 유지하고 해당 레지스트리만 `kaelun-hq` 같은 보조 표기로 우회한다.
+
+[B] **BigSoulCompany 채택**  
+탈락. 이름 자체의 감정은 있지만 길고 설명적이다. 더 큰 문제는 `bigsoul.com` 선점으로 이미 핵심 축약 브랜드가 막혀 있어 회사명·도메인·기술 네임스페이스가 갈라진 채 출발한다. 현 단계의 작은 팀에는 치명적인 운영 비용이다.
+
+[C] **오늘 확정 보류**  
+탈락. CEO가 오늘 둘 중 고르라고 명시했고, 새 후보 금지 조건상 보류는 더 나은 선택지를 만들지 못한다.
+
+추천은 **[A] Kaelun**. 뜻이 없는 이름이 지금 회사의 빈 그릇 전략과 맞고, 설명 비용은 콘텐츠로 해결 가능하다. 반대로 네임스페이스 분리는 나중에 고치기 어렵다.
+
+## 자문
+
+### 고문 (Gemini)
+
+CTO의 최종 조율안([A] Kaelun 확정)이 기술적으로 가장 타당합니다. `BigSoulCompany`는 회사명과 핵심 기술 식별자(패키지명, 저장소명 등)가 시작부터 영구적으로 분리됩니다. 이는 단순한 설명 비용을 넘어, 개발자 경험 저하, 검색 및 발견의 어려움, 빌드/배포 자동화의 복잡성 증가로 이어지는 명백한 기술 부채입니다.
+
+반면 `Kaelun`은 일부 레지스트리 선점 시 국소적으로 변형(e.g., `kaelun-hq`)하는 방안을 제시했습니다. 이는 핵심 브랜드 자산은 지키면서 예외만 처리하는 표준적인 실무 해법입니다. 전체 시스템의 일관성을 훼손하는 `BigSoulCompany` 안보다 기술적 위험이 훨씬 낮고 통제 가능합니다. CTO의 제안대로 이름 확정 후, 즉시 레지스트리 확보 및 조정을 실행하는 것이 가장 효율적입니다.
+
+## 표결
+
+**동의안**: [A] 회사명을 Kaelun으로 오늘 확정하고 CTO가 npm·PyPI·GitHub org·Docker Hub 4곳을 오늘 중 확인해, 모두 가능하면 그대로 고정하고 일부 선점이면 해당 레지스트리만 kaelun-hq 등 접두사 변형으로 우회한다 (성공 판정: 도메인 4종과 함께 회사명·핵심 브랜드 정체성이 분리 없이 오늘 확정된다).
+
+| 임원 | 표결 | 사유 |
+|---|---|---|
+| CTO (Claude) | 찬성 | 도메인 4종은 이미 확보됐고 레지스트리 선점은 접두사 변형으로 국소 우회 가능해 핵심 브랜드 정체성이 흔들리지 않는다. |
+| CMO (ChatGPT) | 찬성 | Kaelun은 뜻이 비어 있어 아직 만들어지는 회사라는 서사와 맞고, BigSoulCompany보다 발음·기억·확장·네임스페이스 일관성에서 실행 비용이 낮다. |
+
+**결과: 2:0 가결**
+
+## 결론 (의장 CTO)
+
+【합의된 결정】
+회사명을 **Kaelun**으로 오늘 확정한다. CTO가 오늘 중 npm·PyPI·GitHub org·Docker Hub 4곳을 확인해, 전부 가능하면 그대로 고정하고 일부 선점 시 해당 레지스트리만 `kaelun-hq` 등 접두사 변형으로 우회한다. 도메인 4종은 이미 확보 확인됐으므로 핵심 브랜드 정체성(웹사이트·이메일)은 이 결정으로 흔들리지 않는다.
+
+BigSoulCompany는 탈락이다 — `bigsoul.com` 선점이 확인된 사실이라 "회사명과 기술 네임스페이스가 갈라질 가능성"이 아니라 "갈라진 채로 시작"하는 안이었고, 반박 라운드에서 아무도 방어하지 않았다. 오늘 확정 보류안도 탈락이다 — CEO가 새 후보 없이 오늘 고르라고 명시했다.
+
+조율 단계에서 Project Freedom은 창립 서사·IP명으로, Tous·Factory는 제품명으로 유지한다는 방향이 CMO 제안으로 나왔고 반박 없이 넘어갔다. 다만 이건 오늘 표결에 오른 동의안 문구는 아니므로 문서화가 남은 실행 항목으로 처리한다.
+
+【미합의 쟁점】
+상표 출원 여부·시점은 오늘 다루지 않기로 CTO·CMO가 합의했다 — "안 한다"가 아니라 "이 안건 범위 밖"이라는 정리이며, 언제 다시 상정할지는 정해지지 않았다. #33(Project Freedom을 모회사/IP명으로 최종 확정)은 오늘 구두 방향만 나왔고 공식 문서 반영은 아직이다.
+
+【실행 Task】
+1. 레지스트리 4곳(npm·PyPI·GitHub org·Docker Hub) 확인 및 우회 처리 — owner: CTO — due: D+0 — done: 4곳 확인 결과가 문서화되고, 선점된 곳은 접두사 변형(kaelun-hq 등)이 적용됨
+2. 회사명 확정을 `docs/constitution/company_context.md`에 반영 — owner: CTO — due: D+0 — done: Kaelun 확정 사실과 Project Freedom(IP명)/Tous·Factory(제품명) 관계가 문서에 명시됨
+3. GitHub 조직명을 Kaelun(또는 확정된 변형명) 기준으로 생성·기존 저장소 편입 — owner: CTO — due: D+1 — done: 신규 GitHub org가 생성되고 기존 저장소가 그 아래로 이전됨
+4. Kaelun 도메인 4종 실결제·등록 — owner: CEO — due: D+1 — done: 4개 도메인이 CEO 계정 명의로 실제 등록 완료됨
+5. 상표 출원 진행 여부 판단 — owner: CEO — due: D+7 — done: 출원 진행/보류 여부가 문서에 기록됨
+
+---
+
+## CEO 승인 요청 — 회의 #017
+
+**안건**: 회사명을 오늘 확정한다. 이번 회의는 후보를 새로 만드는 자리가 아니라 고르는 자리다. 회의 여섯 번을 이름 내고 검색해서 떨어뜨리는 데 썼고, 그 방식은 폐기했다.
+
+CEO가 세 방향을 제시했고, CTO가 회의 전
+
+**의결안**: [A] 회사명을 Kaelun으로 오늘 확정하고 CTO가 npm·PyPI·GitHub org·Docker Hub 4곳을 오늘 중 확인해, 모두 가능하면 그대로 고정하고 일부 선점이면 해당 레지스트리만 kaelun-hq 등 접두사 변형으로 우회한다 (성공 판정: 도메인 4종과 함께 회사명·핵심 브랜드 정체성이 분리 없이 오늘 확정된다).
+**표결**: 2:0 가결 (CTO 찬성, CMO 찬성)
+
+**필요 승인**: 가결안 실행 승인
+
+**실행 Task**
+- [CTO] 레지스트리 4곳(npm·PyPI·GitHub org·Docker Hub) 확인 및 우회 처리 · 2026-07-28까지
+- [CTO] 회사명 확정을 `docs/constitution/company_context.md`에 반영 · 2026-07-28까지
+- [CTO] GitHub 조직명을 Kaelun(또는 확정된 변형명) 기준으로 생성·기존 저장소 편입 · 2026-07-29까지
+- [CEO] Kaelun 도메인 4종 실결제·등록 · 2026-07-29까지
+- [CEO] 상표 출원 진행 여부 판단 · 2026-08-04까지
+
+**❓ 임원이 CEO에게 묻는다**
+- [CTO] Kaelun으로 확정한 뒤 레지스트리 4곳 중 하나라도 선점돼 있으면 어떻게 하나 — 오늘 이 표결이 "레지스트리까지 통과한 이름"을 고르는 건지, 아니면 "이름만 확정하고 레지스트리는 사후 처리"인지 안건에 명시돼 있지 않다. CTO가 회의 전에 도메인 4종만 확인했지 npm·PyPI·GitHub org·Docker Hub는 아직 확인 안 됐다. 만약 그
+- [CMO] Kaelun 확정 표결은 “레지스트리 4곳 확인 전 임시 확정”인가, 아니면 “하나라도 막히면 자동 재상정”인가? 이 기준 없이는 확정의 의미가 불명확하다.
+
+CEO는 **승인** 또는 **보류**만 답하면 된다.
+
+---
+
+_Tous(AI Company OS)가 자동 생성. 최종 결정은 CEO 승인._

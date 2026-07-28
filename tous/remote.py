@@ -65,7 +65,7 @@ def do_tasks():
         return "Task 없음."
     lines = ["📋 Task 목록"]
     for t in ts:
-        mark = "✅" if t["status"] == "done" else "⬜"
+        mark = {"done": "✅", "closed": "➖"}.get(t["status"], "⬜")
         lines.append(f"{mark} #{t['id']:02d} [{t['owner']}] {t['task']}")
     return "\n".join(lines)
 
@@ -85,7 +85,7 @@ def do_done(arg):
 
 def do_report():
     ts = tous.load_tasks()
-    opens = [t for t in ts if t["status"] != "done"]
+    opens = [t for t in ts if t["status"] not in ("done", "closed")]
     ceo = [t for t in opens if t["owner"] == "CEO"]
     meetings = []
     if os.path.isdir(tous.MEETINGS):
@@ -129,21 +129,49 @@ def do_minutes(arg):
         return f.read()
 
 
+BOARD = "http://localhost:7000"
+
+
+def _board_alive():
+    try:
+        urllib.request.urlopen(BOARD + "/", timeout=3).read(1)
+        return True
+    except Exception:
+        return False
+
+
 def do_meeting(token, chat_id, agenda):
+    """폰에서 연 회의도 PC의 board를 거쳐 돌린다 — 그래야 녹화(다시보기)가 남는다.
+
+    board 없이 직접 돌리면 회의록 마크다운만 남고 replay 타임라인이 생기지 않아
+    나중에 재생할 수 없다."""
     if not agenda.strip():
         return "사용법: /meeting 회사명을 정하자"
-    send(token, chat_id, f"🏛 회의 소집 중...\n안건: {agenda}\n\n임원 발언을 모으는 중입니다. 몇 분 걸립니다.")
+    live = _board_alive()
+    note = "\n\n🔴 PC에서 라이브 관전·녹화됩니다." if live else "\n\n⚠ board 미실행 — 녹화 없이 진행합니다."
+    send(token, chat_id, f"🏛 회의 소집 중...\n안건: {agenda}{note}\n\n몇 분 걸립니다.")
     before = set(os.listdir(tous.MEETINGS)) if os.path.isdir(tous.MEETINGS) else set()
     try:
-        tous.cmd_meeting(agenda)
+        if live:
+            # board의 SSE 스트림으로 회의를 돌린다(녹화·라이브 화면 공유)
+            url = BOARD + "/stream?agenda=" + urllib.parse.quote(agenda)
+            with urllib.request.urlopen(url, timeout=3000) as r:
+                for _ in r:                      # 완료까지 스트림을 소비
+                    pass
+        else:
+            tous.cmd_meeting(agenda)
     except Exception as e:
         return f"회의 실패: {e}"
     after = set(os.listdir(tous.MEETINGS)) if os.path.isdir(tous.MEETINGS) else set()
     new = sorted(after - before)
     if not new:
         return "회의는 돌았으나 회의록을 찾지 못했습니다."
-    with open(os.path.join(tous.MEETINGS, new[-1]), encoding="utf-8") as f:
-        return f.read()
+    body = open(os.path.join(tous.MEETINGS, new[-1]), encoding="utf-8").read()
+    if live:
+        m = re.search(r"meeting-(\d+)", new[-1])
+        if m:
+            body += f"\n\n▶ 다시보기: {BOARD}/replay?no={int(m.group(1))}"
+    return body
 
 
 HELP = (

@@ -6,3 +6,11 @@ tous/.env
 tous/vertex_key.json
 tous/remote.log
 tous/.boardroom/
+
+# 커밋 제외 — 외부 소스·로컬 상태
+LibreChat/
+.code-review-graph/
+tous/worklog.json
+tous/autorun_chain.json
+tous/requests.json
+tous/commented.json
