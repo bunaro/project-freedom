@@ -1,6 +1,6 @@
 # Project Freedom Story
 
-## EP.1 — 「연구소를 공개하다」
+## EP.1 — 「AI가 나아갈 방향을 제시했다」
 
 _2026년 7월 22일_
 
@@ -146,8 +146,8 @@ AI와 함께 회사를 만들고, 시행착오를 드러내고, 그 과정을 �
 
 ---
 
-**다음 이야기** — [EP.2 「프로젝트 이름보다 먼저 바뀐 것은 질문이었다」](EP-002-질문이-먼저-바뀌었다.md)
+**다음 이야기** — [EP.2 「프로젝트 이름보다 먼저 바뀐 것은 질문이었다」](EP-002-%EC%A7%88%EB%AC%B8%EC%9D%B4-%EB%A8%BC%EC%A0%80-%EB%B0%94%EB%80%8C%EC%97%88%EB%8B%A4.md)
 
 ---
 
-_작성: ChatGPT(CMO) · 재료: [Archive #001](../ARCHIVE/ARCHIVE-001-연구소를-공개하다.md)_
+_작성: ChatGPT(CMO) · 재료: [Archive #001](../ARCHIVE/ARCHIVE-001-AI%EA%B0%80-%EB%B0%A9%ED%96%A5%EC%9D%84-%EC%A0%9C%EC%8B%9C%ED%96%88%EB%8B%A4.md)_

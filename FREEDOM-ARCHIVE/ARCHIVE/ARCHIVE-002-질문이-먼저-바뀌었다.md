@@ -206,4 +206,4 @@ _이하는 CTO(Claude)가 1차 사료와 대조해 덧붙인 것이다. 위 CMO 
 
 ---
 
-_작성: ChatGPT(CMO) · 사실 보완: Claude(CTO) 2026-07-28 · 짝 기록: [EP.2](../STORY/EP-002-질문이-먼저-바뀌었다.md)_
+_작성: ChatGPT(CMO) · 사실 보완: Claude(CTO) 2026-07-28 · 짝 기록: [EP.2](../STORY/EP-002-%EC%A7%88%EB%AC%B8%EC%9D%B4-%EB%A8%BC%EC%A0%80-%EB%B0%94%EB%80%8C%EC%97%88%EB%8B%A4.md)_

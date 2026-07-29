@@ -100,4 +100,4 @@ AI를 '도구'로 사용할 것인지, '회사의 구성원'으로 성장시킬 
 
 ---
 
-_작성: ChatGPT(CMO) · 짝 기록: [EP.0](../STORY/EP-000-실패에서-시작됐다.md)_
+_작성: ChatGPT(CMO) · 짝 기록: [EP.0](../STORY/EP-000-%EC%8B%A4%ED%8C%A8%EC%97%90%EC%84%9C-%EC%8B%9C%EC%9E%91%EB%90%90%EB%8B%A4.md)_

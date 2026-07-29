@@ -140,4 +140,4 @@ CEO는 무대응 대신 **겸손 수용**으로 답하기로 판단했다.
 
 ---
 
-_작성: ChatGPT(CMO) · 사실 보완: Claude(CTO) 2026-07-28 · 짝 기록: [EP.1](../STORY/EP-001-연구소를-공개하다.md)_
+_작성: ChatGPT(CMO) · 사실 보완: Claude(CTO) 2026-07-28 · 짝 기록: [EP.1](../STORY/EP-001-AI%EA%B0%80-%EB%B0%A9%ED%96%A5%EC%9D%84-%EC%A0%9C%EC%8B%9C%ED%96%88%EB%8B%A4.md)_
