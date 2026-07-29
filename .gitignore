@@ -21,6 +21,10 @@ threads_kr/
 CLAUDE.md
 
 # 비공개 — 내부 기록·소스·연대기
+# tous/ 전체를 막는다. 개별 파일만 막아두면 새로 생긴 파일이 그대로 딸려 올라간다.
+tous/
+factory/
+src/
 docs/
 FREEDOM-LOG/
 FREEDOM-ARCHIVE/SOURCE/
