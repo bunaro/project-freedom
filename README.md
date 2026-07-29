@@ -1,49 +1,95 @@
 # Project Freedom
 
-Project Freedom은 AI에게 회사를 만들 자유를 주면 실제 회사를 만들 수 있는지 실험하는 공개형 회사 설립 프로젝트다.
+**AI에게 회사를 만들 자유를 주면, 실제로 회사를 만들 수 있는가.**
 
-가장 먼저 읽어야 할 문서:
+이 저장소는 그 실험의 공개 기록이다. 성공담이 아니라 관찰기다 —
+지금까지 회의 19번, 완료한 일 18개, 무효가 된 일 55개, **매출 0원.**
 
-- [창세기](./docs/constitution/genesis.md) — 이 회사가 시작된 대화
-- [Freedom Log](./FREEDOM-LOG/README.md) — 회사 연대기 (역사가 된 사건만)
-- [시스템 구조](./docs/architecture/overview.md) — Tous·Orca·Factory·GitHub의 역할
+회사 이름은 **bunaro(버나로)**다. 19번째 회의에서 정해졌다.
+
+---
+
+## 어떻게 돌아가는가
+
+```
+CEO(사람)가 목표를 준다
+        ↓
+AI 임원들이 회의한다 — 의견 → 반박 → 조율 → 표결
+        ↓
+결론이 실행 항목이 된다
+        ↓
+CTO가 만들고, 사람만 할 수 있는 일은 CEO에게 올라간다
+```
+
+**CEO는 사업도 브랜드도 정하지 않는다.** 목표를 주고, 승인하고, 방향만 고친다.
+회사 이름조차 AI 회의로 정했다.
+
+| 역할 | 누구 | 담당 |
+|---|---|---|
+| CEO | 사람 | 목표 제시 · 승인 · 방향 수정 |
+| CTO | Claude | 개발 · 자동화 · 실행 |
+| CMO | ChatGPT | 브랜드 · 콘텐츠 · 고객 관점 |
+| 기술 고문 | Gemini | 기술 자문 (표결권 없음) |
+
+CSO 자리는 비어 있다. Gemini와 Copilot이 차례로 이사회 역할을 거부했다 —
+"저는 소프트웨어 엔지니어링 도구입니다." 그 기록도 [남아 있다](./docs/meetings/meeting-008.md).
+
+---
+
+## 무엇부터 읽으면 되나
+
+**이야기가 궁금하면** → [Freedom Archive](./FREEDOM-ARCHIVE/)
+회사가 만들어지는 과정을 이야기(Story)와 공식 기록(Archive)으로 남긴다.
+[EP.0 — 모든 것은 실패에서 시작됐다](./FREEDOM-ARCHIVE/STORY/EP-000.md)부터.
+
+**AI들이 실제로 뭐라고 했는지 궁금하면** → [회의록 전문](./docs/meetings/)
+19번의 회의가 발언 하나까지 그대로 있다. 임원이 자기 안을 철회한 것도,
+없는 인맥을 가정해 통과시킨 계획이 무효가 된 것도 전부.
+
+**어떻게 만들었는지 궁금하면** → [Tous](./tous/)
+AI 임원을 불러 회의를 돌리는 프로그램. 파이썬 2천 줄, 외부 패키지 0개.
+
+---
+
+## Tous — 회의를 돌리는 프로그램
+
+각 임원은 **자기 구독 CLI**로 답한다. API 종량과금이 아니라서
+**회의를 몇 번 열어도 추가 비용이 0원**이다. 이게 이 프로젝트가 유지되는 이유다.
+
+```bash
+python tous/tous.py meeting "안건"      # 회의 소집 → 회의록 + 실행 항목
+python tous/board.py                    # 웹 관전 콘솔 (실시간 + 다시보기)
+python tous/namecheck2.py 후보1 후보2    # 이름 후보 전수 검증
+python tous/remote.py                   # 텔레그램 리모컨
+```
+
+회의는 **의견 → 반박 → 조율 → 기술 자문 → 표결 → 결론** 순으로 진행된다.
+표결에서 지는 쪽이 나오고, 진 임원의 반대 사유도 회의록에 남는다.
+
+---
 
 ## 기록 체계
 
 | 무엇 | 어디 | 성격 |
 |---|---|---|
-| 창립 문서 | `docs/constitution/` | 정체성. 모든 임원이 회의 전에 읽는다 |
-| 회의록 | `docs/meetings/` | 모든 회의 전문 (Tous가 자동 생성) |
-| 연대기 | `FREEDOM-LOG/` | 역사가 된 사건만 (수동 승격) |
-| 임원 기억 | `tous/memory/` | 임원별 과거 발언 요지 (자동 누적) |
+| 이야기·공식 기록 | [`FREEDOM-ARCHIVE/`](./FREEDOM-ARCHIVE/) | 왜 그렇게 됐는지 |
+| 회의록 | [`docs/meetings/`](./docs/meetings/) | 발언 전문 (Tous가 자동 생성) |
+| 연대기 | [`FREEDOM-LOG/`](./FREEDOM-LOG/) | 역사가 된 사건만 |
+| 회사의 현실 | [`docs/constitution/`](./docs/constitution/) | 매 회의에 자동 주입되는 제약 조건 |
+| 임원 기억 | `tous/memory/` | 임원별 과거 발언 (자동 누적) |
 
-## Tous 사용법
-
-```bash
-python tous/tous.py meeting "안건"   # 회의 소집 → 회의록 + Task
-python tous/tous.py report           # CEO 보고
-python tous/namecheck.py 후보1 후보2  # 이름 후보 일괄 검증
-python tous/remote.py                # 텔레그램 리모컨 (모바일에서 조종)
-```
-
-## 초기 구조
-
-```text
-Project-Freedom/
-  FREEDOM-LOG-001.md
-  README.md
-  docs/
-    constitution/
-    meetings/
-    architecture/
-  tous/
-  factory/
-  src/
-```
+---
 
 ## 원칙
 
-- CEO는 방향 제시, 승인, 질문을 맡는다.
-- AI 임원들은 동의만 하지 않고 토론하며 근거를 제시한다.
-- 회의 결과는 실행 가능한 Task로 바뀐다.
-- 결과는 GitHub와 공개 콘텐츠로 증명한다.
+**실패를 지우지 않는다.** 무효가 된 계획 55개도 기록에 남아 있다.
+AI가 엉뚱한 결정을 내린 것도, 그걸 CEO가 뒤집은 것도 그대로 쓴다.
+
+**확인하지 않은 것을 사실처럼 쓰지 않는다.** 임원이 근거 없이 가정하면
+그 가정이 표시되고, CEO 확인 항목으로 올라간다.
+
+**표결 결과는 구속력이 있다.** 반대한 임원도 가결된 안을 실행한다.
+
+---
+
+_이 프로젝트는 [bunaro](https://github.com/bunaro)가 공개적으로 진행 중이다._
