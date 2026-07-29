@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 260" width="880" height="260" font-family="'Segoe UI',system-ui,-apple-system,sans-serif">
+  <style>
+    .bg   { fill: #0f1115; }
+    .card { fill: #171a21; stroke: #262b36; }
+    .num  { fill: #e6e8ee; font-size: 42px; font-weight: 800; }
+    .lbl  { fill: #8b93a3; font-size: 13px; letter-spacing: .04em; }
+    .zero { fill: #f87171; }
+    .head { fill: #8b93a3; font-size: 13px; letter-spacing: .12em; }
+    .bar  { fill: #262b36; }
+    .done { fill: #34d399; }
+    .void { fill: #f87171; }
+    .open { fill: #a78bfa; }
+    .tiny { fill: #8b93a3; font-size: 11px; }
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #ffffff; } .card { fill: #f6f7f9; stroke: #e2e5ea; }
+      .num { fill: #16181d; } .head, .lbl, .tiny { fill: #6b7280; }
+      .bar { fill: #e2e5ea; }
+    }
+  </style>
+
+  <rect class="bg" width="880" height="260" rx="14"/>
+  <text class="head" x="32" y="36">일주일 성적표 · 2026-07-29</text>
+
+  <!-- 숫자 카드 4개 -->
+  <g>
+    <rect class="card" x="32"  y="54" width="196" height="92" rx="10"/>
+    <text class="num" x="52" y="108">19</text>
+    <text class="lbl" x="52" y="130">회의</text>
+
+    <rect class="card" x="244" y="54" width="196" height="92" rx="10"/>
+    <text class="num" x="264" y="108">81</text>
+    <text class="lbl" x="264" y="130">할 일</text>
+
+    <rect class="card" x="456" y="54" width="196" height="92" rx="10"/>
+    <text class="num" x="476" y="108">11</text>
+    <text class="lbl" x="476" y="130">임원 불참</text>
+
+    <rect class="card" x="668" y="54" width="180" height="92" rx="10"/>
+    <text class="num zero" x="688" y="108">0</text>
+    <text class="lbl" x="688" y="130">매출 (원)</text>
+  </g>
+
+  <!-- 할 일 내역 막대 -->
+  <text class="head" x="32" y="184">할 일 81개의 행방</text>
+  <g transform="translate(32,196)">
+    <rect class="bar" width="816" height="18" rx="9"/>
+    <!-- 완료 18 / 무효 55 / 진행중 8 -->
+    <rect class="done" width="181" height="18" rx="9"/>
+    <rect class="void" x="181" width="554" height="18"/>
+    <rect class="open" x="735" width="81" height="18" rx="9"/>
+  </g>
+  <g transform="translate(32,236)">
+    <circle class="done" cx="5" cy="-4" r="5"/>
+    <text class="tiny" x="16" y="0">완료 18</text>
+    <circle class="void" cx="105" cy="-4" r="5"/>
+    <text class="tiny" x="116" y="0">무효 55 — 전제부터 틀린 계획들</text>
+    <circle class="open" cx="345" cy="-4" r="5"/>
+    <text class="tiny" x="356" y="0">진행중 8</text>
+  </g>
+</svg>
