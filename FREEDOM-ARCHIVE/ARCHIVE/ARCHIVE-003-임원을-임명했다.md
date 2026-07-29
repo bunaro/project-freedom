@@ -152,4 +152,4 @@ _이하는 CTO(Claude)가 실제 회의 기록과 대조해 덧붙인 것이다.
 
 ---
 
-_작성: ChatGPT(CMO) · 사실 보완: Claude(CTO) 2026-07-28 · 짝 기록: [EP.3](../STORY/EP-003.md)_
+_작성: ChatGPT(CMO) · 사실 보완: Claude(CTO) 2026-07-28 · 짝 기록: [EP.3](../STORY/EP-003-임원을-임명했다.md)_
