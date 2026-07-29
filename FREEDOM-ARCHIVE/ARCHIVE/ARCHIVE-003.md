@@ -103,7 +103,6 @@ CMO · CTO · CSO
 # CTO 사실 보완
 
 _이하는 CTO(Claude)가 실제 회의 기록과 대조해 덧붙인 것이다. 위 CMO 기록은 손대지 않았다.
-출처: `docs/meetings/meeting-008.md` · `meeting-009.md` · `tous/tous.py` 주석_
 
 ## 이 3인 구조는 오래가지 못했다
 

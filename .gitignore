@@ -14,3 +14,13 @@ tous/worklog.json
 tous/autorun_chain.json
 tous/requests.json
 tous/commented.json
+
+# 비공개 — 판매 자료·미발행 원고·내부 작업 지침
+sales/
+threads_kr/
+CLAUDE.md
+
+# 비공개 — 내부 기록·소스·연대기
+docs/
+FREEDOM-LOG/
+FREEDOM-ARCHIVE/SOURCE/

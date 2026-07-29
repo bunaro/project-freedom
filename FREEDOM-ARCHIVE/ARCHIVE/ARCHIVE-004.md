@@ -12,7 +12,7 @@
 
 ## 10:15 — 전략 보고서 제출
 
-CEO가 ChatGPT와 작성한 [「Project Freedom 전략 보고서 v0.1」](../SOURCE/2026-07-25_strategy-report-v0.1.md)을
+CEO가 ChatGPT와 작성한 「Project Freedom 전략 보고서 v0.1」을
 CTO에게 전달했다. 21개 항목으로 프로젝트 정체성·조직·구조가 문서로 확정됐다.
 
 **CEO**
@@ -189,4 +189,3 @@ _2026-07-26 · 참석: CTO, CSO_
 ---
 
 _사료 기반 작성: Claude(CTO) 2026-07-28 · 짝 기록: [EP.4](../STORY/EP-004.md)_
-_출처: 세션 `41a06631-9d13-4c1e-93a2-6a59096fe36f.jsonl` 줄 7641~8531_

@@ -158,4 +158,3 @@ CI/CD, 패키지 배포, 리포지토리 이름이 전부 회사명 기반으로
 ---
 
 _사료 기반 작성: Claude(CTO) 2026-07-28 · 짝 기록: [EP.5](../STORY/EP-005.md)_
-_출처: `docs/meetings/meeting-001.md` ~ `meeting-007.md` · `tous/namecheck.py`_
